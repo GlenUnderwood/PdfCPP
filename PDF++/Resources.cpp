@@ -105,12 +105,12 @@ string pdfResources::Add( pdfAtom atmObj )
 		{
 			try
 			{
-				pdfDictionary dictFonts = this[sDictName];// as pdfDictionary;
+				pdfDictionary dictFonts = operator[](sDictName);// as pdfDictionary;
 				if (dictFonts != nullptr)
 				{
-					pdfAtom atm = dictFonts[atmObj.GetId()]
+					pdfAtom atm = dictFonts[atmObj.GetId()];
 					if( atm != nullptr )
-						return szKey;
+						sKey = atm.GetKey();
 				}
 			}
 			catch (...) {}

@@ -62,11 +62,16 @@ pdfAtom pdfDictionary::operator[]( const pdfObjId& idx )
 	return Get(idx);
 }
 
-//pdfAtom pdfDictionary::operator[]( const std::string& szKey )// const
-//{
-//	return Get(szKey.c_str());
-//}
+pdfAtom pdfDictionary::operator[]( const std::string& sKey )// const
+{
+	return Get(sKey.c_str());
+}
 
+
+pdfAtom pdfDictionary::Get( const std::string& sKey ) const
+{
+	return Get(sKey.c_str());
+}
 
 pdfAtom pdfDictionary::Get( const pdfObjId& szKey ) const
 {
@@ -144,6 +149,15 @@ bool pdfDictionary::Has( const char* szKey ) const throw()
 {
 	CheckIsValid(); 
 	return ( m_data->m_dictItems.find(szKey) != m_data->m_dictItems.end() );
+}
+bool pdfDictionary::Has( const pdfObjId& id ) const throw()
+{
+	CheckIsValid(); 
+
+	for (auto it = m_data->m_dictItems.begin(); it != m_data->m_dictItems.end(); ++it)
+		if (it->second->m_id == id)
+			return true;
+	return false;
 }
 
 pdfString pdfDictionary::SetString( const char* key, const char* sVal )

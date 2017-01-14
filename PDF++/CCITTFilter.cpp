@@ -7,20 +7,11 @@
 // TODO what to do when on Windows but using the gnu compiler? (like in Eclipse)
 #ifdef _WINDOWS
 #define USE_WIN32_FILEIO
-#define __WIN32__
-#include <tiffio.h>
-#include <tiffio.hxx>
+	#define __WIN32__
+#endif
 
-// TODO Fix this
-#ifdef _DEBUG
-	#pragma comment(lib,"libTiffD.lib")
-#else
-	#pragma comment(lib,"libTiff.lib")
-#endif
-#else
 #include <tiffio.h>
 #include <tiffio.hxx>
-#endif
 
 ///////////////////////
 namespace Pdf {

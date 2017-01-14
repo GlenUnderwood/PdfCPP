@@ -29,7 +29,7 @@ public:
 	pdfAtom operator[]( const size_t  i )  const;
 	pdfAtom operator[]( const char* i );// const;
 	pdfAtom operator[]( const pdfObjId& i );// const;
-	//pdfAtom operator[]( const std::string& i );// const;
+	pdfAtom operator[]( const std::string& i );// const;
 
 	//void Add( const char* szKey, const pdfAtom& atm ); 
 	bool Has( const char* szKey ) const throw();
@@ -38,10 +38,7 @@ public:
 	pdfAtom Get( const size_t  i ) const;
 	pdfAtom Get( const char* szKey ) const;
 	pdfAtom Get( const pdfObjId& id ) const;
-	//inline pdfAtom pdfDictionary::Get( const std::string& szKey )// const
-	//{
-	//	return Get( szKey.c_str() );
-	//}
+	pdfAtom Get( const std::string& szKey ) const;
 
 	pdfAtom Set( const size_t i, const pdfAtom& atm );
 	pdfAtom Set( const char* szKey, const pdfAtom& atm );

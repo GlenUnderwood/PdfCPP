@@ -7,10 +7,10 @@
 
 using namespace std;
 
-#include "..\PDF++.h"
-#include "..\FlateFilter.h"
-#include "..\Writer.h"
-#include "..\StdSecurity.h"
+#include "..\PDF++\PDF++.h"
+#include "..\PDF++\FlateFilter.h"
+#include "..\PDF++\Writer.h"
+#include "..\PDF++\StdSecurity.h"
 
 using namespace Pdf;
 using namespace Pdf::Exception;
@@ -244,7 +244,7 @@ int main(int argc, char* argv[])
 	//std::stringbuf tmpBuf;
 	std::stringbuf tmpBuf;
 #ifdef _WINDOWS
-	std::ofstream fLog("e:\\Projects\\PDF++\\Pdf++.Txt");
+	std::ofstream fLog("e:\\Projects\\PDFcpp\\PDF++\\Pdf++.Txt");
 #else
 	std::ofstream fLog("$/Desktop/Pdf++.Txt");
 #endif

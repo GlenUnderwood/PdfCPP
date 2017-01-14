@@ -12,23 +12,15 @@ pdfPage::pdfPage(void)// : pdfObject()
 {
 }
 
-pdfPage::pdfPage(const pdfAtom& src) : pdfDictionary(src)
+pdfPage::pdfPage(const pdfAtom& src)
 {
-	if( !IsNull() )
-	{
-		if (GetType() != AtomType::Dictionary )
-			throw pdfTypeMismatchException();
-
-		bool bIsPage = Get("Type").Str() == "Page";
-		if( !bIsPage )
-			throw pdfObjectInvalidEx();
-	}
+	operator=(src);
 }
 
-pdfPage::pdfPage(pdfDocument& doc)  : pdfDictionary(doc)
-{
-
-}
+//pdfPage::pdfPage(pdfDocument& doc)  : pdfDictionary(doc)
+//{
+//
+//}
 
 pdfPage::~pdfPage(void)
 {
@@ -36,27 +28,39 @@ pdfPage::~pdfPage(void)
 
 pdfPage& pdfPage::operator=(const pdfAtom& src)
 {
-	pdfDictionary::operator=(src);
-	if( !IsNull() )
+	pdfObject::operator=(src);
+	if( !src.IsNull() )
 	{
-		if (GetType() != AtomType::Dictionary )
+		if (src.GetType() != AtomType::Dictionary )
 			throw pdfTypeMismatchException();
 
-		bool bIsPage = Get("Type").Str() == "Page";
+		m_atm = src;
+
+		bool bIsPage = operator[]( "Type" ).Str() == "Page";
 		if( !bIsPage )
 			throw pdfObjectInvalidEx();
 	}
 	return *this;
 }
 
+bool pdfPage::operator==( const pdfPage& src ) const
+{
+	return this == &src || src.m_atm == m_atm;
+}
+
+bool pdfPage::operator==( const pdfObjId& id ) const
+{
+	return m_atm == id;
+}
+
 pdfRect pdfPage::GetBox(const char* szName)
 {
-	CheckIsValid();
+	m_atm.CheckIsValid();
 
 	pdfRect rc;
 	pdfArray box( operator[](szName) );
 
-	if( !box.IsNull() )
+	//if( !box.IsNull() )
 	if( box )
 	{
 		if( box.GetCount() < 4 )
@@ -73,11 +77,11 @@ pdfRect pdfPage::GetBox(const char* szName)
 
 void pdfPage::SetBox(const char* szName, const pdfRect& rc)
 {
-	CheckIsValid();
+	m_atm.CheckIsValid();
 
 	pdfArray box( operator[](szName) );
 
-	//if( !box.IsNull() )
+	//if( !box.m_atm.IsNull() )
 	if( box )
 	{
 		if( box.GetCount() < 4 )
@@ -90,10 +94,10 @@ void pdfPage::SetBox(const char* szName, const pdfRect& rc)
 	}
 	else if( !box )
 	{
-		pdfDocument doc( m_data->m_doc.lock() );
+		pdfDocument doc( m_atm.m_data->m_doc.lock() );
 		box = doc.CreateArray( 4 );
 
-		Set( szName, box );
+		GetDict().Set( szName, box );
 	}
 	box[0].SetValue( rc.Left );
 	box[1].SetValue( rc.Top );
@@ -136,7 +140,7 @@ void pdfPage::SetCropBox( const pdfRect& rect)
 		*/
 pdfRect pdfPage::GetCropBox()
 {
-	if( Has("CropBox") )
+	if(GetDict().Has("CropBox") )
 		return GetBox("CropBox");
 	return GetBox("MediaBox");
 }
@@ -144,8 +148,8 @@ pdfRect pdfPage::GetCropBox()
 pdfAtom pdfPage::Annotations()
 {
 	//pdfDictionary me( GetDict() );
-	if ( Has("Annotations") )
-		return Get( "Annotations" );
+	if (GetDict().Has("Annotations") )
+		return GetDict().Get( "Annotations" );
 	return pdfAtom();
 }
 
@@ -153,8 +157,8 @@ pdfContents pdfPage::Contents()
 {
 	pdfContents res;
 	//pdfDictionary me( GetDict() );
-	if ( Has("Contents") )
-		return Get( "Contents" );
+	if (GetDict().Has("Contents") )
+		return GetDict().Get( "Contents" );
 	return res;
 }
 
@@ -162,8 +166,8 @@ pdfResources pdfPage::Resources()
 {
 	pdfResources res;
 	//pdfDictionary me( GetDict() );
-	if ( Has("Resources") )
-		return Get( "Resources" );
+	if (GetDict().Has("Resources") )
+		return GetDict().Get( "Resources" );
 	return res;
 }
 
