@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{82662CB5-E986-4EC4-954B-7DC736778F4C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PDF</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;PDF_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\third-party\zlib-1.2.10;..\third-party\tiff-4.0.3\libtiff</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>..\third-party\bin\win32\zlibstatd.lib;..\third-party\bin\win32\libtiffd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;PDF_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\third-party\zlib-1.2.10;..\third-party\tiff-4.0.3\libtiff</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\third-party\bin\win32\libtiff.lib;..\third-party\bin\win32\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="Array.h" />
+    <ClInclude Include="Atom.h" />
+    <ClInclude Include="AtomData.h" />
+    <ClInclude Include="Blob.h" />
+    <ClInclude Include="Bookmark.h" />
+    <ClInclude Include="Bookmarks.h" />
+    <ClInclude Include="CCITTFilter.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="ColorSpace.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="ContentItem.h" />
+    <ClInclude Include="Contents.h" />
+    <ClInclude Include="Destination.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="DocData.h" />
+    <ClInclude Include="Document.h" />
+    <ClInclude Include="Enum.h" />
+    <ClInclude Include="ExportDef.h" />
+    <ClInclude Include="ExtGState.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="Filters.h" />
+    <ClInclude Include="FlateFilter.h" />
+    <ClInclude Include="FormXObject.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="GState.h" />
+    <ClInclude Include="ImageObj.h" />
+    <ClInclude Include="ImportExport.h" />
+    <ClInclude Include="Int.h" />
+    <ClInclude Include="Int64.h" />
+    <ClInclude Include="Interfaces.h" />
+    <ClInclude Include="MD5.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Name.h" />
+    <ClInclude Include="NameTree.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjId.h" />
+    <ClInclude Include="Page.h" />
+    <ClInclude Include="Pages.h" />
+    <ClInclude Include="PDF++.h" />
+    <ClInclude Include="Bool.h" />
+    <ClInclude Include="pdfException.h" />
+    <ClInclude Include="pdfReader.h" />
+    <ClInclude Include="pdfTypes.h" />
+    <ClInclude Include="RC4.h" />
+    <ClInclude Include="Real.h" />
+    <ClInclude Include="Reference.h" />
+    <ClInclude Include="References.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="SecurityHandler.h" />
+    <ClInclude Include="Serializable.h" />
+    <ClInclude Include="SharedBuff.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StdSecurity.h" />
+    <ClInclude Include="streams.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TState.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Writer.h" />
+    <ClInclude Include="ZLibMgr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Array.cpp" />
+    <ClCompile Include="Atom.cpp" />
+    <ClCompile Include="AtomData.cpp" />
+    <ClCompile Include="Blob.cpp" />
+    <ClCompile Include="Bookmark.cpp" />
+    <ClCompile Include="Bookmarks.cpp" />
+    <ClCompile Include="CCITTFilter.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="ColorSpace.cpp" />
+    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="ContentItem.cpp" />
+    <ClCompile Include="Contents.cpp" />
+    <ClCompile Include="Destination.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DocData.cpp" />
+    <ClCompile Include="Document.cpp" />
+    <ClCompile Include="Enum.cpp" />
+    <ClCompile Include="ExtGState.cpp" />
+    <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="Filters.cpp" />
+    <ClCompile Include="FlateFilter.cpp" />
+    <ClCompile Include="FormXObject.cpp" />
+    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="GState.cpp" />
+    <ClCompile Include="ImageObj.cpp" />
+    <ClCompile Include="Int.cpp" />
+    <ClCompile Include="Int64.cpp" />
+    <ClCompile Include="MD5.cpp" />
+    <ClCompile Include="Name.cpp" />
+    <ClCompile Include="NameTree.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjId.cpp" />
+    <ClCompile Include="Page.cpp" />
+    <ClCompile Include="Pages.cpp" />
+    <ClCompile Include="PDF++.cpp" />
+    <ClCompile Include="Bool.cpp" />
+    <ClCompile Include="pdfException.cpp" />
+    <ClCompile Include="pdfReader.cpp" />
+    <ClCompile Include="RC4.cpp" />
+    <ClCompile Include="Real.cpp" />
+    <ClCompile Include="Reference.cpp" />
+    <ClCompile Include="References.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="SecurityHandler.cpp" />
+    <ClCompile Include="Serializable.cpp" />
+    <ClCompile Include="SharedBuff.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="StdSecurity.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="TState.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Writer.cpp" />
+    <ClCompile Include="ZLibMgr.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

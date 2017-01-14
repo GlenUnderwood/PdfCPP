@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug NMAKE|Win32">
+      <Configuration>Debug NMAKE</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release  NMAKE|Win32">
+      <Configuration>Release  NMAKE</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A8AC551A-4B9D-436F-A950-F3493F97B059}</ProjectGuid>
+    <RootNamespace>LibTiffWin</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\LibMacros.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\LibMacros.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(LIB_OUTPUT)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(LIB_OUTPUT)Tmp\</IntDir>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">nmake /F makefile.vc </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">nmake /F makefile.vc clean 
+nmake /F makefile.vc</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">nmake /F makefile.vc clean </NMakeCleanCommandLine>
+    <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(IntDir)LibTiff.lib</NMakeOutput>
+    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">WIN32;_WIN32;USE_WIN32_FILEIO;_DEBUG;CCITT_SUPPORT;JPEG_SUPPORT;PACKBITS_SUPPORT;LOGLUV_SUPPORT;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug NMAKE|Win32'">$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(Configuration)\</IntDir>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">nmake /F makefile.vc </NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">nmake /F makefile.vc clean 
+nmake /F makefile.vc</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">nmake /F makefile.vc clean </NMakeCleanCommandLine>
+    <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(IntDir)LibTiff.lib</NMakeOutput>
+    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">WIN32;_WIN32;USE_WIN32_FILEIO;NDEBUG;CCITT_SUPPORT;JPEG_SUPPORT;PACKBITS_SUPPORT;LOGLUV_SUPPORT;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='Release  NMAKE|Win32'">$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LIB_OUTPUT)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LIB_OUTPUT)Tmp\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LIB_OUTPUT)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LIB_OUTPUT)Tmp\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>libtiff</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>libtiff</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <PreprocessorDefinitions>WIN32;_WIN32;_DEBUG;_WINDOWS;USE_WIN32_FILEIO;TIF_PLATFORM_CONSOLE;CCITT_SUPPORT;PACKBITS_SUPPORT;LOGLUV_SUPPORT;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <PreprocessorDefinitions>WIN32;_WIN32;NDEBUG;_WINDOWS;USE_WIN32_FILEIO;TIF_PLATFORM_CONSOLE;CCITT_SUPPORT;PACKBITS_SUPPORT;LOGLUV_SUPPORT;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="tif_aux.c" />
+    <ClCompile Include="tif_close.c" />
+    <ClCompile Include="tif_codec.c" />
+    <ClCompile Include="tif_color.c" />
+    <ClCompile Include="tif_compress.c" />
+    <ClCompile Include="tif_dir.c" />
+    <ClCompile Include="tif_dirinfo.c" />
+    <ClCompile Include="tif_dirread.c" />
+    <ClCompile Include="tif_dirwrite.c" />
+    <ClCompile Include="tif_dumpmode.c" />
+    <ClCompile Include="tif_error.c" />
+    <ClCompile Include="tif_extension.c" />
+    <ClCompile Include="tif_fax3.c" />
+    <ClCompile Include="tif_fax3sm.c" />
+    <ClCompile Include="tif_flush.c" />
+    <ClCompile Include="tif_getimage.c" />
+    <ClCompile Include="tif_jbig.c" />
+    <ClCompile Include="tif_jpeg.c" />
+    <ClCompile Include="tif_luv.c" />
+    <ClCompile Include="tif_lzw.c" />
+    <ClCompile Include="tif_next.c" />
+    <ClCompile Include="tif_ojpeg.c" />
+    <ClCompile Include="tif_open.c" />
+    <ClCompile Include="tif_packbits.c" />
+    <ClCompile Include="tif_pixarlog.c" />
+    <ClCompile Include="tif_predict.c" />
+    <ClCompile Include="tif_print.c" />
+    <ClCompile Include="tif_read.c" />
+    <ClCompile Include="tif_stream.cxx" />
+    <ClCompile Include="tif_strip.c" />
+    <ClCompile Include="tif_swab.c" />
+    <ClCompile Include="tif_thunder.c" />
+    <ClCompile Include="tif_tile.c" />
+    <ClCompile Include="tif_version.c" />
+    <ClCompile Include="tif_warning.c" />
+    <ClCompile Include="tif_win32.c" />
+    <ClCompile Include="tif_write.c" />
+    <ClCompile Include="tif_zip.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="t4.h" />
+    <ClInclude Include="tif_config.h" />
+    <ClInclude Include="tif_config.vc.h" />
+    <ClInclude Include="tif_config.wince.h" />
+    <ClInclude Include="tif_dir.h" />
+    <ClInclude Include="tif_fax3.h" />
+    <ClInclude Include="tif_predict.h" />
+    <ClInclude Include="tiff.h" />
+    <ClInclude Include="tiffconf.h" />
+    <ClInclude Include="tiffconf.vc.h" />
+    <ClInclude Include="tiffconf.wince.h" />
+    <ClInclude Include="tiffio.h" />
+    <ClInclude Include="tiffio.hxx" />
+    <ClInclude Include="tiffiop.h" />
+    <ClInclude Include="tiffvers.h" />
+    <ClInclude Include="uvcode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tif_config.h.in" />
+    <None Include="tiffconf.h.in" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
