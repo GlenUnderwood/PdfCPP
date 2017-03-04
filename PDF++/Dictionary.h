@@ -27,9 +27,9 @@ public:
 	inline pdfDictionary& operator=(const std::nullptr_t i) { SetValue( i ); return *this;}
 
 	pdfAtom operator[]( const size_t  i )  const;
-	pdfAtom operator[]( const char* i );// const;
-	pdfAtom operator[]( const pdfObjId& i );// const;
-	pdfAtom operator[]( const std::string& i );// const;
+	pdfAtom operator[]( const char* i ) const;
+	pdfAtom operator[]( const pdfObjId& i ) const;
+	pdfAtom operator[]( const std::string& i ) const;
 
 	//void Add( const char* szKey, const pdfAtom& atm ); 
 	bool Has( const char* szKey ) const throw();
@@ -79,23 +79,27 @@ public:
 	void Remove( const char* szKey );
 	//void Clear();
 
-	template< class _Fn1> inline
-		_Fn1 ForEach( _Fn1 _Func )
-	{
-		if (m_data != nullptr)
-		{
-			// perform function for each element
-			for (auto it = m_data->m_dictItems.begin(); it != m_data->m_dictItems.end(); ++it)
-			{
-				pdfAtom atm;
-				atm.m_data = it->second;
-				atm = atm.Dereference();
-				_Func( it->first.c_str(), atm );
-				//_Func( *(it->second.get()) );
-			}
-		}
-		return (_Func);
-	}
+	//template< class _Fn1> inline
+	//	_Fn1 ForEach( _Fn1 _Func )
+	//{
+	//	if (m_data != nullptr)
+	//	{
+	//		// perform function for each element
+	//		for (auto it = m_data->m_dictItems.begin(); it != m_data->m_dictItems.end(); ++it)
+	//		{
+	//			pdfAtom atm;
+	//			atm.m_data = it->second;
+	//			atm = atm.Dereference();
+	//			_Func( it->first.c_str(), atm );
+	//			//_Func( *(it->second.get()) );
+	//		}
+	//	}
+	//	return (_Func);
+	//}
+
+	size_t ForEach( EnumDictAtom _Func );
+	size_t ForEach( EnumDictAtom2 _Func );
+
 	/*
 	{	// perform function for each element
 		for (; _First != _Last; ++_First)

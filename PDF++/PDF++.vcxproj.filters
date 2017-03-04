@@ -237,6 +237,36 @@
     <ClInclude Include="TState.h">
       <Filter>PDF\Content\Operators</Filter>
     </ClInclude>
+    <ClInclude Include="ContentReader.h">
+      <Filter>PDF\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsStack.h">
+      <Filter>PDF\Content\Operators</Filter>
+    </ClInclude>
+    <ClInclude Include="TextItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ClipItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="FormItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="PathItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="GStateData.h">
+      <Filter>PDF\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicalContentItem.h">
+      <Filter>PDF\Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -403,6 +433,33 @@
     </ClCompile>
     <ClCompile Include="TState.cpp">
       <Filter>PDF\Content\Operators</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentReader.cpp">
+      <Filter>PDF\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsStack.cpp">
+      <Filter>PDF\Content\Operators</Filter>
+    </ClCompile>
+    <ClCompile Include="TextItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="ClipItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="ContainerItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="FormItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="PathItem.cpp">
+      <Filter>PDF\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="GStateData.cpp">
+      <Filter>PDF\DataObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

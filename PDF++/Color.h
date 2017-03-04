@@ -32,7 +32,16 @@ public:
 	pdfColor( float a, float g );
 	virtual ~pdfColor(void);
 
-	pdfColor& operator=(const pdfColor& src);
+	pdfColor& operator=( const pdfColor& src );
+
+	inline bool operator==( const pdfColor& src ) const
+	{
+		return GetARGB() == src.GetARGB();
+	};
+	inline bool operator!=( const pdfColor& src ) const
+	{
+		return GetARGB() != src.GetARGB();
+	};
 
 	static float ToGrayScale( unsigned long c );
 	static float ToGrayScale( float r, float g, float b );
@@ -41,9 +50,9 @@ public:
 		{ return m_Type; };
 	void SetColorSpaceType(const ColorSpaceType& value );
 
-	unsigned long GetRGB();
+	unsigned long GetRGB() const;
 
-	unsigned long GetARGB();
+	unsigned long GetARGB() const;
 
 	float A;
 	float R, G, B;

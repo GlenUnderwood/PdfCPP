@@ -10,6 +10,7 @@
 #include "AtomData.h"
 #include "Serializable.h"
 #include "pdfException.h"
+#include <functional>
 
 namespace Pdf{
 
@@ -20,7 +21,7 @@ class PDF_API pdfAtom : public CSerializable
 	friend class pdfReference;
 	friend class pdfReader;
 	friend class pdfDictionary;
-	friend class pdfArray;
+	//friend class pdfArray;
 	//friend std::ostream& operator<<( std::ostream& stm, const pdfAtom& atm );
 public:
 	pdfAtom(void);
@@ -246,7 +247,13 @@ public:
 	CAtomData::Ptr m_data;
 };
 
+// for use with ForEach on the dictionary class
+typedef std::function<bool( const char* key, pdfAtom& atm )> EnumDictAtom;
+typedef std::function<void( const char* key, pdfAtom& atm )> EnumDictAtom2;
 
+// for use with ForEach on the dictionary and array classes
+typedef std::function<bool( pdfAtom& atm )> EnumArrayAtom;
+typedef std::function<void( pdfAtom& atm )> EnumArrayAtom2;
 
 } ; //namespace Pdf
 

@@ -242,4 +242,42 @@ void pdfArray::TakeOwnership(const pdfAtom& atm)
 //	}
 //	return (_Func);
 //}
+
+size_t pdfArray::ForEach( EnumArrayAtom _Func )
+{
+	size_t i = 0;
+	if (m_data != nullptr)
+	{
+		// perform function for each element
+		for (auto it = m_data->m_vecArray.begin(); it != m_data->m_vecArray.end(); ++it)
+		{
+			pdfAtom atm;
+			atm.m_data = *(it);
+			atm = atm.Dereference();
+			if (!_Func( atm ))
+				break;
+			i++;
+		}
+	}
+	return i;
+}; 
+
+size_t pdfArray::ForEach( EnumArrayAtom2 _Func )
+{
+	size_t i = 0;
+	if (m_data != nullptr)
+	{
+		// perform function for each element
+		for (auto it = m_data->m_vecArray.begin(); it != m_data->m_vecArray.end(); ++it)
+		{
+			pdfAtom atm;
+			atm.m_data = *(it);
+			atm = atm.Dereference();
+			_Func( atm );
+			i++;
+		}
+	}
+	return i;
+}; 
+
 };// namespace Exception

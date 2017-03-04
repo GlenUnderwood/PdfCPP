@@ -44,7 +44,7 @@ pdfAtom pdfDictionary::operator[]( const size_t idx ) const
 	return Get(idx);
 }
 
-pdfAtom pdfDictionary::operator[]( const char* szKey )// const
+pdfAtom pdfDictionary::operator[]( const char* szKey ) const
 {
 	//  Add if it doesn't exist.
 	//pdfAtom a( Get(szKey) );// Get( )doesn't throw (might later, so if it does then call Has() first 
@@ -57,12 +57,12 @@ pdfAtom pdfDictionary::operator[]( const char* szKey )// const
 	return Get(szKey);//a;
 }
 
-pdfAtom pdfDictionary::operator[]( const pdfObjId& idx )
+pdfAtom pdfDictionary::operator[]( const pdfObjId& idx ) const
 {
 	return Get(idx);
 }
 
-pdfAtom pdfDictionary::operator[]( const std::string& sKey )// const
+pdfAtom pdfDictionary::operator[]( const std::string& sKey ) const
 {
 	return Get(sKey.c_str());
 }
@@ -373,5 +373,42 @@ void pdfDictionary::TakeOwnership(const pdfAtom& atm, const char* szKey)
 //	}
 //	return (_Func);
 //}
+
+size_t pdfDictionary::ForEach( EnumDictAtom _Func )
+{
+	size_t i = 0;
+	if (m_data != nullptr)
+	{
+		// perform function for each element
+		for (auto it = m_data->m_dictItems.begin(); it != m_data->m_dictItems.end(); ++it)
+		{
+			pdfAtom atm;
+			atm.m_data = it->second;
+			atm = atm.Dereference();
+			if (!_Func( it->first.c_str(), atm ))
+				break;
+			i++;
+		}
+	}
+	return i;
+}
+size_t pdfDictionary::ForEach( EnumDictAtom2 _Func )
+{
+	size_t i = 0;
+	if (m_data != nullptr)
+	{
+		// perform function for each element
+		for (auto it = m_data->m_dictItems.begin(); it != m_data->m_dictItems.end(); ++it)
+		{
+			pdfAtom atm;
+			atm.m_data = it->second;
+			atm = atm.Dereference();
+			_Func( it->first.c_str(), atm );
+			i++;
+		}
+	}
+	return i;
+}
+
 
 };// namespace Exception

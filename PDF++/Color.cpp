@@ -221,7 +221,7 @@ void pdfColor::SetColorSpaceType(const ColorSpaceType& value )
 	}
 }
 
-unsigned long pdfColor::GetRGB()
+unsigned long pdfColor::GetRGB() const
 {
 	//ushort 2;
 	// small local lambda func to pack into one unsigned long
@@ -265,7 +265,7 @@ unsigned long pdfColor::GetRGB()
 	throw pdfUnhandledColorSpaceEx();
 }
 		
-unsigned long pdfColor::GetARGB()
+unsigned long pdfColor::GetARGB() const
 {
 	// small local lambda func to pack into one unsigned long
 	auto FromArgb = [&] ( int a, int r, int g, int b ) { return (unsigned long)( (((byte)a) << 24) | (((byte)b) << 16) ) | (((byte)g) << 8) | (((byte)r)  ); };

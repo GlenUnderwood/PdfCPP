@@ -233,21 +233,12 @@ void pdfMatrix::Translate( float a, float b )
 
 void pdfMatrix::TransformPoint( pdfPoint& pt )
 {
-	pt.X = ( pt.X * m_mat[ 0 ] + pt.Y * m_mat[ 1 ] ) + m_mat[ 4 ];
-	pt.Y = ( pt.X * m_mat[ 2 ] + pt.Y * m_mat[ 3 ] ) + m_mat[ 5 ];
+	float x = pt.X;
+	float y = pt.Y;
+	pt.X = ( x * m_mat[ 0 ] + y * m_mat[ 1 ] ) + m_mat[ 4 ];
+	pt.Y = ( x * m_mat[ 2 ] + y * m_mat[ 3 ] ) + m_mat[ 5 ];
 }
-/*void pdfMatrix::TransformPoint( ref System.Drawing.PointF pt )
-{
-	pt.X = ( pt.X * m_mat[ 0 ] + pt.Y * m_mat[ 1 ] ) + m_mat[ 4 ];
-	pt.Y = ( pt.X * m_mat[ 2 ] + pt.Y * m_mat[ 3 ] ) + m_mat[ 5 ];
-}
-void pdfMatrix::TransformPoints( System.Drawing.PointF[] pts )
-{
-	for ( int i = 0; i < pts.Length; i++ )
-	{
-		TransformPoint( ref pts[ i ] );
-	}
-}*/
+
 void pdfMatrix::Multiply( float a, float b, float c, float d, float e, float f/*, System.Drawing.Drawing2D.MatrixOrder order*/ )
 {
 	/*System.Drawing.Drawing2D.Matrix m = new System.Drawing.Drawing2D.Matrix( m_mat[ 0 ], m_mat[ 1 ], m_mat[ 2 ], m_mat[ 3 ], m_mat[ 4 ], m_mat[ 5 ] );

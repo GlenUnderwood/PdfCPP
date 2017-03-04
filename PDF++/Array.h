@@ -16,6 +16,7 @@ namespace Pdf {
 
 class pdfDocument;
 
+
 class PDF_API pdfArray : public pdfAtom
 {
 public:
@@ -30,7 +31,6 @@ public:
 		SetValue( i );
 		return *this;
 	}
-
 
 	pdfAtom operator[]( const size_t i );
 
@@ -49,7 +49,7 @@ public:
 	void Remove( const size_t idx );
 	//void Clear();
 
-	template< class _Fn1> 
+	/*template< class _Fn1> 
 	inline _Fn1 ForEach(_Fn1 _Func)
 	{
 		if( m_data != nullptr )
@@ -65,7 +65,11 @@ public:
 			//std::for_each( m_data->m_vecArray.begin(), m_data->m_vecArray.end(), _Func );
 		}
 		return (_Func);
-	};
+	};*/
+
+	size_t ForEach( EnumArrayAtom _Func );
+	size_t ForEach( EnumArrayAtom2 _Func );
+
 protected:
 	void TakeOwnership(const pdfAtom& atm);
 	// Used for references when we have to affect its reference count (like when adding to a collection)

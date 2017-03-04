@@ -31,6 +31,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfAtl>false</UseOfAtl>
     <PlatformToolset>v140</PlatformToolset>
+    <WindowsAppContainer>false</WindowsAppContainer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -45,6 +46,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -95,6 +97,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\third-party\zlib-1.2.10;..\third-party\tiff-4.0.3\libtiff</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,9 +182,12 @@
     <ClInclude Include="Bookmark.h" />
     <ClInclude Include="Bookmarks.h" />
     <ClInclude Include="CCITTFilter.h" />
+    <ClInclude Include="ClipItem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorSpace.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="ContainerItem.h" />
+    <ClInclude Include="ContentReader.h" />
     <ClInclude Include="ContentItem.h" />
     <ClInclude Include="Contents.h" />
     <ClInclude Include="Destination.h" />
@@ -194,9 +200,14 @@
     <ClInclude Include="Filter.h" />
     <ClInclude Include="Filters.h" />
     <ClInclude Include="FlateFilter.h" />
+    <ClInclude Include="FormItem.h" />
     <ClInclude Include="FormXObject.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="GraphicalContentItem.h" />
+    <ClInclude Include="GraphicsStack.h" />
     <ClInclude Include="GState.h" />
+    <ClInclude Include="GStateData.h" />
+    <ClInclude Include="ImageItem.h" />
     <ClInclude Include="ImageObj.h" />
     <ClInclude Include="ImportExport.h" />
     <ClInclude Include="Int.h" />
@@ -210,6 +221,7 @@
     <ClInclude Include="ObjId.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Pages.h" />
+    <ClInclude Include="PathItem.h" />
     <ClInclude Include="PDF++.h" />
     <ClInclude Include="Bool.h" />
     <ClInclude Include="pdfException.h" />
@@ -228,6 +240,7 @@
     <ClInclude Include="streams.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TextItem.h" />
     <ClInclude Include="TState.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Writer.h" />
@@ -242,9 +255,12 @@
     <ClCompile Include="Bookmark.cpp" />
     <ClCompile Include="Bookmarks.cpp" />
     <ClCompile Include="CCITTFilter.cpp" />
+    <ClCompile Include="ClipItem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorSpace.cpp" />
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="ContainerItem.cpp" />
+    <ClCompile Include="ContentReader.cpp" />
     <ClCompile Include="ContentItem.cpp" />
     <ClCompile Include="Contents.cpp" />
     <ClCompile Include="Destination.cpp" />
@@ -270,9 +286,13 @@
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="Filters.cpp" />
     <ClCompile Include="FlateFilter.cpp" />
+    <ClCompile Include="FormItem.cpp" />
     <ClCompile Include="FormXObject.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="GraphicsStack.cpp" />
     <ClCompile Include="GState.cpp" />
+    <ClCompile Include="GStateData.cpp" />
+    <ClCompile Include="ImageItem.cpp" />
     <ClCompile Include="ImageObj.cpp" />
     <ClCompile Include="Int.cpp" />
     <ClCompile Include="Int64.cpp" />
@@ -283,6 +303,7 @@
     <ClCompile Include="ObjId.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Pages.cpp" />
+    <ClCompile Include="PathItem.cpp" />
     <ClCompile Include="PDF++.cpp" />
     <ClCompile Include="Bool.cpp" />
     <ClCompile Include="pdfException.cpp" />
@@ -303,6 +324,7 @@
     </ClCompile>
     <ClCompile Include="StdSecurity.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="TextItem.cpp" />
     <ClCompile Include="TState.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Writer.cpp" />

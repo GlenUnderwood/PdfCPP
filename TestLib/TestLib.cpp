@@ -44,10 +44,10 @@ in=nullptr;
 	//pg.Contents().
 
 	pgs.Add();
-	pgs.Add();
-	pgs.Add();
-	pgs.Add();
-	pgs.Add();
+	//pgs.Add();
+	//pgs.Add();
+	//pgs.Add();
+	//pgs.Add();
 
 	// TODO Why is this possible - CDocData shouldn't be getting exported.
 	string s = doc.GetData()->m_filename;
@@ -62,9 +62,9 @@ in=nullptr;
 	clr = pdfColor(RGB(255,127,127), false);
 	
 
-	Pdf::Security::pdfStdSecurity sec = Pdf::Security::pdfStdSecurity::NewSecurity( doc, "user", nullptr, Pdf::All, true );
+	//Pdf::Security::pdfStdSecurity sec = Pdf::Security::pdfStdSecurity::NewSecurity( doc, "user", nullptr, Pdf::All, true );
 
-	doc.SetSecurity( &sec );
+	//doc.SetSecurity( &sec );
 
 	
 	////////////////////
@@ -241,6 +241,9 @@ int main(int argc, char* argv[])
 	auto del = [&] (streambuf* p) { std::clog.rdbuf(p); };
 	unique_ptr<streambuf,decltype(del)> holdBuff( std::clog.rdbuf(), del );// returns the original pointer of clog to what it was
 	
+
+
+	//* **********************************************
 	//std::stringbuf tmpBuf;
 	std::stringbuf tmpBuf;
 #ifdef _WINDOWS
@@ -250,15 +253,14 @@ int main(int argc, char* argv[])
 #endif
 	//std::clog.rdbuf(&tmpBuf);
 	std::clog.rdbuf(fLog.rdbuf());
+
 	// Log to a file instead of the console.
-
-
-
 	CreateDoc();
 	
 	
 	return 0;
 
+	/* ********************************************* */
 	// TODO won'y compile in GNU
 	Pdf::byte b;
 	Pdf::bytestream bs(10);

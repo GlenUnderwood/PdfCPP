@@ -107,6 +107,7 @@ namespace Pdf{
 	#define Key_Rect "Rect"
 	#define Key_Rotation "Rotation"
 	#define Key_Decode "Decode"
+	#define Key_Properties "Properties"
 
 	#define Key_NotDef ".notdef"
 	//#define Key_CRLF Environment.NewLine

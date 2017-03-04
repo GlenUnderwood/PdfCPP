@@ -175,7 +175,7 @@ namespace Pdf {
 		Container
 	} PDF_API ContentType;
 
-	typedef enum _GStateFlags
+	typedef enum _GStateFlags : UINT32
 	{
 		NoGState	= 0,
 		StrokeColor	= 0x000001,
@@ -189,7 +189,7 @@ namespace Pdf {
 		LineCap		= 0x00000100,
 		LineJoin	= 0x00000200,
 		RI			= 0x00000400,
-		ExtGStateE	= 0x00000800,// E for embedded.  Just needed a unqique name
+		ExtGState_	= 0x00000800,// added underscore because needed a unique name
 		Clip		= 0x00001000,
 
 		ZoomX		= 0x00002000,
@@ -199,7 +199,7 @@ namespace Pdf {
 		TransY		= 0x00020000
 	} PDF_API GStateFlags;
 
-	typedef enum _TStateFlags
+	typedef enum _TStateFlags : UINT32
 	{
 		NoTState		= 0,
 		Font			= 0x00000001,
@@ -228,6 +228,51 @@ namespace Pdf {
 		FillAndStroke,
 		Invisible
 	} PDF_API TextRenderMode;
+
+	typedef enum _GraphicsOps
+	{
+		op_bad = 0,
+		op_Q = 1, // "Q"
+		op_q, // "q"
+		op_cm, // "cm"
+		op_Tm, // "Tm"
+		op_Do, // "Do"
+		op_BT, // "BT"
+		op_ET, // "ET"
+		op_BMC, // "BMC"
+		op_BDC, // "BDC"
+		op_EMC, // "EMC"
+		op_DP, // "DP"
+		op_MP, // "MP"
+		op_Tf, // "Tf"
+		op_Tj, // "Tj"
+		op_TJ, // "TJ"
+		op_Tstar, // "T*"
+		op_TD, // "TD"
+		op_Td, // "Td"
+		op_Tr, // "Tr"
+		op_Th, // "Th"
+		op_Tw, // "Tw"
+		op_Tc, // "Tc"
+		op_Ts, // "Ts"
+		op_Tz, // "Tz"
+		op_TL, // "TL"
+		op_g, // "g"
+		op_G, // "G"
+		op_rg, // "rg"
+		op_RG, // "RG"
+		op_K, // "K"
+		op_k, // "k"
+		op_m, // "m"
+		op_l, // "l"
+		op_re, // "re"
+		op_n, // "n"
+		op_f, // "f"
+		op_Wstar, // "W*"
+		op_w, // "w"
+		op_W, // "W"
+		op_gs, // "gs"
+	} PDF_API GraphicsOps;
 };// namespace Pdf
 
 PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::AtomType& t );
@@ -235,3 +280,19 @@ PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::AtomType& t );
 PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::FilterType& t );
 
 PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::OutputStyle& t );
+
+PDF_API Pdf::Permissions operator|=( const Pdf::Permissions& lhs, const Pdf::Permissions& rhs )
+{
+	return (Pdf::Permissions)((UINT32)lhs | (UINT32)rhs);
+};
+
+PDF_API Pdf::GStateFlags operator|=( const Pdf::GStateFlags& lhs, const Pdf::GStateFlags& rhs )
+{
+	return (Pdf::GStateFlags)((UINT32)lhs | (UINT32)rhs);
+};
+
+PDF_API Pdf::TStateFlags operator|=( const Pdf::TStateFlags& lhs, const Pdf::TStateFlags& rhs )
+{
+	return (Pdf::TStateFlags)((UINT32)lhs | (UINT32)rhs);
+};
+

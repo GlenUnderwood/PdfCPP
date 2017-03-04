@@ -100,6 +100,12 @@ public:
 	float GetRotation();
 	void SetRotation(float value);
 
+	inline bool operator==( const pdfMatrix& rhs ) {
+		return memcmp( &m_mat, &rhs.m_mat, sizeof( m_mat ) ) == 0;
+	};
+	inline bool operator!=( const pdfMatrix& rhs ) {
+		return !operator==(rhs);
+	};
 	inline float operator[]( const int& idx );
 
 	void Set( const int& idx, float a );
@@ -207,3 +213,4 @@ PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::Geometry::pdfPoi
 PDF_API std::ostream& operator<<( std::ostream& stm, const Pdf::Geometry::pdfMatrix& id );
 // for chaining one or more ops together.
 PDF_API Pdf::Geometry::pdfMatrix operator*( Pdf::Geometry::pdfMatrix& lhs, Pdf::Geometry::pdfMatrix& rhs );
+

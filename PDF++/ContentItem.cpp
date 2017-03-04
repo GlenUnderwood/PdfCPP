@@ -4,12 +4,11 @@
 namespace Pdf {
 namespace Content {
 
-pdfContentItem::pdfContentItem(void)
+pdfContentItemBase::pdfContentItemBase(void)
 {
 }
 
-
-pdfContentItem::~pdfContentItem(void)
+pdfContentItemBase::~pdfContentItemBase(void)
 {
 }
 

@@ -15,6 +15,19 @@ namespace Pdf{
 class pdfReader;
 class pdfReference;
 
+
+
+//class pdfStream
+//{
+//public:
+//	virtual size_t GetSize() = 0;
+//	virtual size_t GetPos() = 0;
+//	virtual size_t Seek( size_t pos ) = 0;
+//	virtual size_t Read( byte* pBuffer, size_t count ) = 0;
+//	virtual size_t Write( byte* pBuffer, size_t count ) = 0;
+//};
+
+
 class CDocData //: public IDocData
 {
 public:
@@ -34,8 +47,9 @@ public:
 
 	// TODO Need to use istream so as to support it all but need to be able to close/is_open/etc 
 	// maybe another flag or a pointer or something.
+	///pdfStream m_stm; // pdfStream
 	std::fstream m_stm;
-	//
+						//
 	std::string m_filename;
 
 	bool m_bIsLocked, m_bIsReadOnly, m_bDirty, m_bEncrypted, m_bTemp, m_bNew;

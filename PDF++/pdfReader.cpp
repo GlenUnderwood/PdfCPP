@@ -36,7 +36,7 @@ pdfReader::pdfReader( const CDocData::Ptr& doc, int iNewCursor )
 	m_doc = doc;
 
 	if( m_doc.expired() || m_doc.lock() == nullptr)
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 
 	m_strDefStrEncoding = StringEncoding::ASCII;
 	
@@ -50,7 +50,7 @@ pdfReader::pdfReader( const CDocData::Ptr& doc, std::istream* pStm, int iNewCurs
 	m_doc = doc;
 
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 
 	m_strDefStrEncoding = StringEncoding::ASCII;
 	
@@ -68,7 +68,7 @@ void pdfReader::SetCursor( int iCursor )
 	if ( m_stm!=nullptr )
 	{
 		if( /*m_stm == nullptr || */m_doc.expired() )
-			throw pdfException("Reader requires a valid document object to function.");
+			throw pdfDocClosedException();
 		m_stm->seekg( _iCursor );
 		m_stm->read( &_Current, 1 ) ;//= (char)m_Stm.ReadByte();
 		m_stm->read( &_Next, 1 ) ;//= (char)m_Stm.ReadByte();
@@ -82,7 +82,7 @@ pdfReader::~pdfReader(void)
 void pdfReader::Parse()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	//if (m_doc.lock()->IsOpen() )
 	{
 		pdfAtom atm = ReadNum();
@@ -100,7 +100,7 @@ void pdfReader::Parse()
 void pdfReader::Reset(std::istream* stm, int iNewCursor)
 {
 //	if( m_doc.expired() )
-//		throw pdfException("Reader requires a valid document object to function.");
+//		throw pdfDocClosedException();
 
 	m_stm = stm;
 
@@ -144,7 +144,7 @@ bool pdfReader::IsDelimiter(char c) const throw()
 char pdfReader::GotoNextChar()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		_Previous = _Current;
@@ -317,7 +317,7 @@ byte pdfReader::FromHexDigit(char cDigit)
 pdfAtom pdfReader::ReadNum()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		pdfDocument doc(m_doc.lock());
@@ -394,7 +394,7 @@ pdfAtom pdfReader::ReadNum()
 pdfAtom pdfReader::ReadName()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		pdfDocument doc(m_doc.lock());
@@ -472,7 +472,7 @@ pdfAtom pdfReader::ReadName()
 pdfAtom pdfReader::ReadString()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		pdfDocument doc(m_doc.lock());
@@ -647,7 +647,7 @@ pdfAtom pdfReader::ReadString()
 pdfAtom pdfReader::ReadHexString()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		pdfDocument doc(m_doc.lock());
@@ -733,7 +733,7 @@ pdfAtom pdfReader::ReadHexString()
 pdfAtom pdfReader::ReadDict()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	pdfDocument doc(m_doc.lock());
 	pdfDictionary dictNew( doc.CreateDict(false) );
 	if (m_doc.lock()->IsOpen() )
@@ -835,7 +835,7 @@ pdfAtom pdfReader::ReadDict()
 pdfAtom pdfReader::ReadArray()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	pdfAtom atmNew;
 	if (m_doc.lock()->IsOpen() )
 	{
@@ -897,7 +897,7 @@ pdfAtom pdfReader::ReadArray()
 pdfAtom pdfReader::ReadObj()
 {
 	if( /*m_stm == nullptr || */m_doc.expired() )
-		throw pdfException("Reader requires a valid document object to function.");
+		throw pdfDocClosedException();
 	if (m_doc.lock()->IsOpen() )
 	{
 		pdfDocument doc(m_doc.lock());

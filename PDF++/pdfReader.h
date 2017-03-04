@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-namespace Pdf{
+namespace Pdf {
 
 class pdfReader
 {
