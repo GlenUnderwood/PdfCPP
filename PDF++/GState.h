@@ -20,6 +20,31 @@ public:
 
 	pdfGState& operator=( const pdfGState& rhs );
 
+	class DashPattern
+	{
+	public:
+		typedef std::shared_ptr<DashPattern> Ptr;
+
+		DashPattern() :m_Phase( 0 ) { }
+		DashPattern( const DashPattern& rhs );
+
+		DashPattern& operator=( const DashPattern& rhs );
+
+		std::vector<int>& GetArray();
+		void SetArray( const std::vector<int>& src );
+
+		int GetPhase() const;
+		void SetPhase( const int& src );
+
+		bool operator==( const DashPattern& rhs );
+		bool operator!=( const DashPattern& rhs ) {
+			return !operator==( rhs );
+		};
+	private:
+		std::vector<int> m_Array;
+		int m_Phase;
+	};
+
 	//////
 	GStateFlags GetFlags();
 	void SetFlags( const GStateFlags& value );
@@ -39,10 +64,13 @@ public:
 	Geometry::pdfMatrix GetMatrix();
 	void SetMatrix( const Geometry::pdfMatrix& value );
 
-	std::vector<int> GetDashArray();
-	void SetDashArray( const std::vector<int>& value );
-	int GetDashPhase();
-	void SetDashPhase( const int value );
+	DashPattern::Ptr GetDashPattern();
+	void SetDashPattern( const DashPattern::Ptr& value );
+
+	//std::vector<int> GetDashArray();
+	//void SetDashArray( const std::vector<int>& value );
+	//int GetDashPhase();
+	//void SetDashPhase( const int value );
 
 	byte GetFlatnessTolerance();
 	void SetFlatnessTolerance( const byte value );
@@ -59,13 +87,29 @@ public:
 	pdfExtGState GetExtGState();
 	void SetExtGState( const pdfExtGState& value );
 
-	Content::pdfClipItem& GetClip();
+	Content::pdfClipItem GetClip() ;
 	void SetClip( const Content::pdfClipItem& value );
 
 	GStateFlags Differences( const pdfGState& rhs );
 
 protected:
-	void* data;
+	GStateFlags m_Flags;
+	pdfColor m_StrokeColor;
+	pdfColor m_FillColor;
+	float m_LineWidth;
+	float m_MiterLimit;
+	byte m_FlatnessTolerance;
+	byte m_LineCap;
+
+	byte m_LineJoin;
+	std::string m_RenderingIntent;
+
+	std::shared_ptr<DashPattern> m_Dash;
+
+	Content::pdfClipItem m_pathClip;
+	pdfExtGState m_ExtGState;
+
+	Geometry::pdfMatrix m_Mat;
 };
 
 };

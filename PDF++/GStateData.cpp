@@ -6,78 +6,49 @@
 
 namespace Pdf{
 
-CDashPattern::CDashPattern( const CDashPattern& rhs ) : m_Phase( 0 )
-{
-	operator=( rhs );
-}
-
-CDashPattern& CDashPattern::operator=( const CDashPattern& rhs )
-{
-	m_Array.insert( m_Array.end(), rhs.m_Array.begin(), rhs.m_Array.end() );
-	m_Phase = rhs.m_Phase;
-	return *this;
-}
-bool CDashPattern::operator==( const CDashPattern& rhs )
-{
-	if ((!m_Array.empty() && rhs.m_Array.empty()) || (m_Array.empty() && !rhs.m_Array.empty()))
-		return false;
-	if (m_Array != rhs.m_Array)
-		return false;
-	return m_Phase == rhs.m_Phase;
-	//pdfGState rhs = obj as pdfGState ;
-	//if (m_LineWidth != rhs.m_LineWidth
-	//    || m_MiterLimit != rhs.m_MiterLimit
-	//    || m_FlatnessTolerance != rhs.m_FlatnessTolerance
-	//    || m_LineCap != rhs.m_LineCap
-	//    || m_LineJoin != rhs.m_LineJoin
-	//    || m_RenderingIntent != rhs.m_RenderingIntent
-	//    || m_StrokeColor != rhs.m_StrokeColor
-	//    || m_FillColor != rhs.m_FillColor
-	//    || ExtGState != rhs.ExtGState
-	//    || Mat != rhs.Mat
-	//    || Dash != rhs.Dash
-	//    || Clip != rhs.Clip
-	//    )
-	//    return false;
-	//return true;
-}
-
-std::vector<int>& CDashPattern::GetArray()
-{
-	return m_Array;
-}
-void CDashPattern::SetArray( const std::vector<int>& src )
-{
-	m_Array = src;
-}
-
-int CDashPattern::GetPhase() const
-{
-	return m_Phase;
-}
-void CDashPattern::SetPhase( const int& src )
-{
-	m_Phase = src;
-}
-
 /////////////////////////
-CGStateData::CGStateData(void)
+CGStateData::CGStateData(void) : 
+	m_RenderingIntent( "RelativeColorimetric" ),
+	m_StrokeColor( 1.0F, 0 ), m_FillColor( 1.0F, 0 ),
+	m_LineWidth( 1.0F ), m_MiterLimit( 10.0F ),
+	m_Flags( GStateFlags::NoGState )
+
 {
 }
 
-//CGStateData::CGStateData(const CGStateData& src)
-//{
-//	operator=( src );
-//}
+CGStateData::CGStateData(const CGStateData& src) : 
+	m_RenderingIntent( "RelativeColorimetric" ),
+	m_StrokeColor( 1.0F, 0 ), m_FillColor( 1.0F, 0 ),
+	m_LineWidth( 1.0F ), m_MiterLimit( 10.0F ),
+	m_Flags( GStateFlags::NoGState )
+{
+	operator=( src );
+}
 
 CGStateData::~CGStateData(void)
 {
 }
 
-//CGStateData& CGStateData::operator=(const CGStateData& _src)
-//{
-//	return *this;
-//
-//}
+CGStateData& CGStateData::operator=(const CGStateData& src)
+{
+
+	//Mat = src.Mat != nullptr ? src.Mat.Clone() : new Matrix(1, 0, 0, 1, 0, 0);
+	m_Mat = src.m_Mat;
+	m_StrokeColor = src.m_StrokeColor;
+	m_FillColor = src.m_FillColor;
+	m_LineWidth = src.m_LineWidth;
+	m_MiterLimit = src.m_MiterLimit;
+	m_FlatnessTolerance = src.m_FlatnessTolerance;
+	m_LineJoin = src.m_LineJoin;
+	m_LineCap = src.m_LineCap;
+	m_pathClip = src.m_pathClip;
+	m_RenderingIntent = src.m_RenderingIntent;
+	m_Dash = src.m_Dash;
+	m_ExtGState = src.m_ExtGState ;
+
+	m_Flags = src.m_Flags;
+
+	return *this;
+}
 
 };//namespace Pdf

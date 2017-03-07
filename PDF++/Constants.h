@@ -154,6 +154,14 @@ namespace Pdf{
 		#define Key_w "w"
 		#define Key_W "W"
 		#define Key_gs "gs"
+		#define Key_d "d" // Dash Array
+		#define Key_c "c" // curveto
+		#define Key_ri "ri" // RenderingIntent
+		#define Key_bstar "b*"
+		#define Key_quote "'"
+		#define Key_dblquote "\""
+
+
 	//};// Ops
 	
 //};// Keys

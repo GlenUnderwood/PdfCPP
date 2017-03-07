@@ -35,8 +35,12 @@ class CGStateData //: public IAtomData
 {
 public:
 	CGStateData(void);
-	//CGStateData(const CGStateData& src);
+	CGStateData(const CGStateData& src);
 	~CGStateData(void);
+
+	typedef std::shared_ptr<CGStateData> Ptr;
+
+	CGStateData& operator=( const CGStateData& src );
 
 	GStateFlags m_Flags;
 	pdfColor m_StrokeColor;
@@ -49,12 +53,13 @@ public:
 	byte m_LineJoin;
 	std::string m_RenderingIntent;
 
-	std::unique_ptr<CDashPattern> m_Dash;
+	std::shared_ptr<CDashPattern> m_Dash;
 
 	Content::pdfClipItem m_pathClip;
 	pdfExtGState m_ExtGState;
 
 	Geometry::pdfMatrix m_Mat;
 };
+
 
 };//namespace Pdf

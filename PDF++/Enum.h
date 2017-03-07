@@ -272,6 +272,12 @@ namespace Pdf {
 		op_w, // "w"
 		op_W, // "W"
 		op_gs, // "gs"
+		op_d, // "d" dash array
+		op_c, // "c" curveto
+		op_ri, // "ri" RenderingIntent
+		op_bstar, // "b*"
+		op_quote, // "'"
+		op_dblquote, // "\""
 	} PDF_API GraphicsOps;
 };// namespace Pdf
 

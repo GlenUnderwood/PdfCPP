@@ -193,6 +193,12 @@ GraphicsOps pdfContentReader:: StrToOps( const char* sOp )
 		m_mapStrToOps[Key_w] = op_w; // "w"
 		m_mapStrToOps[Key_W] = op_W; // "W"
 		m_mapStrToOps[Key_gs] = op_gs; // "gs"
+		m_mapStrToOps[Key_d] = op_d; // "d"
+		m_mapStrToOps[Key_d] = op_c; // "c"
+		m_mapStrToOps[Key_ri] = op_ri; // "ri"
+		m_mapStrToOps[Key_bstar] = op_bstar; // "b*"
+		m_mapStrToOps[Key_quote] = op_quote; // "'"
+		m_mapStrToOps[Key_dblquote] = op_dblquote;
 	}
 	auto it = m_mapStrToOps.find(sOp);
 	if (it != m_mapStrToOps.end())
@@ -473,8 +479,10 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 				i = lstTokens.size() - 2;
 
 				// throw or assert if the val isn't a number
-				pCurrState->GetGState().LineWidth = lstTokens[i].RealF();
-				if (pCurrState->GetGState().LineWidth < 0.1F) pCurrState->GetGState().LineWidth = 0.1F;
+				pCurrState->GetGState().SetLineWidth( lstTokens[i].RealF() );
+
+				if (pCurrState->GetGState().GetLineWidth() < 0.1F) 
+					pCurrState->GetGState().SetLineWidth( 0.1F );
 
 				lstTokens.clear();
 				break;
@@ -615,7 +623,7 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 
 				lstTokens.clear();
 				break;
-				#pragma endregion 
+			#pragma endregion 
             #pragma region CurveToV
 			case GraphicsOps::op_v: // CurveToV
 				_ASSERT( lstTokens.size() >= 5 );
@@ -1213,7 +1221,7 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 				break;
 				#pragma endregion 
 					////////////////////////////////////////////////////////////////////////////////////////////////////////////
-             #pragma region OP_TJ
+            #pragma region OP_TJ
 			case GraphicsOps::op_TJ:
 				{
 					// here is where we'd best resolve thingsl matrix/points scaling.
@@ -1308,9 +1316,10 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 					lstTokens.clear();
 				}
 				break;
-				#pragma endregion 
-             #pragma region OP '
-			case "'":
+			#pragma endregion 
+
+            #pragma region OP '
+			case GraphicsOps::op_quote:
 				_ASSERT( lstTokens.size() >= 3 );
 				i = lstTokens.size() - 3;
 
@@ -1322,9 +1331,10 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 
 				//lstTokens.clear();
 				break;// return new pdfOp(opType.op_cm, m_Doc);
-				#pragma endregion 
-             #pragma region OP "
-			case "\"":
+			#pragma endregion 
+
+            #pragma region OP "
+			case GraphicsOps::op_dblquote:
 				_ASSERT( lstTokens.size() >= 5 );
 				i = lstTokens.size() - 5;
 
@@ -1440,39 +1450,43 @@ pdfContentReader::ContentItemList pdfContentReader::Parse( const pdfDictionary& 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			#pragma region Marked Content Point With Properties
 			case GraphicsOps::op_DP: // start a new marked content - should have properties associates with it.
-			_ASSERT( lstTokens.size() >= 3 );
-			i = lstTokens.size() - 3;
-			{
-				pdfMarkedContentPointItem pNew = new pdfMarkedContentPointItem( pCurrState->GetGState() );
-				pNew.Tag = lstTokens[i].Str();
+				_ASSERT( lstTokens.size() >= 3 );
+				i = lstTokens.size() - 3;
+				{
+					pdfMarkedContentPointItem pNew = new pdfMarkedContentPointItem( pCurrState->GetGState() );
+					pNew.Tag = lstTokens[i].Str();
 
-				//
-				if (lstTokens[i + 1] is pdfName)
-					pNew.Properties = FindBDCProp( lstTokens[i + 1].Str(), m_dictRes );
-				else if (lstTokens[i + 1] is pdfDictionary)
-					pNew.Properties = lstTokens[i + 1] as pdfDictionary;
-				else
-					_ASSERT( false );
+					//
+					if (lstTokens[i + 1] is pdfName)
+						pNew.Properties = FindBDCProp( lstTokens[i + 1].Str(), m_dictRes );
+					else if (lstTokens[i + 1] is pdfDictionary)
+						pNew.Properties = lstTokens[i + 1] as pdfDictionary;
+					else
+						_ASSERT( false );
 
-				lstObjects.push_back( pNew );
-			}
+					lstObjects.push_back( pNew );
+				}
 
-			lstTokens.clear();
+				lstTokens.clear();
 
-			// Set a marker so we know how to transition graphics states when/if inserting new objects 
-			//lstObjects.push_back( new pdfMarkerItem( pCurrState->GetGState(), pdfMarker.ContainerPoint ) );
-			break;// return new pdfOp(opType.opDo, m_Doc);
+				// Set a marker so we know how to transition graphics states when/if inserting new objects 
+				//lstObjects.push_back( new pdfMarkerItem( pCurrState->GetGState(), pdfMarker.ContainerPoint ) );
+				break;// return new pdfOp(opType.opDo, m_Doc);
 			#pragma endregion 
-				#pragma endregion 
+
+			#pragma endregion 
 
 			default:
-				OutputDebugStringA( "\nUNHANDLED OPERATOR: {0}", sOp );
-				Debug.IndentLevel++;
+				OutputDebugStringA( "\nUNHANDLED OPERATOR: " );
+				OutputDebugStringA( sOp.c_str() );
+				OutputDebugStringA( "\n" );
+
+				//Debug.IndentLevel++;
 				/*foreach( pdfAtom a in lstTokens )
 				{
 					OutputDebugStringA( a.Obj.ToString() );
 				}*/
-				Debug.IndentLevel--;
+				//Debug.IndentLevel--;
 				lstTokens.clear();
 				break;
 			}

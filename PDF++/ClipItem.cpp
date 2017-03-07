@@ -10,6 +10,10 @@ pdfClipItem::pdfClipItem()
 {
 }
 
+pdfClipItem::pdfClipItem( const pdfDictionary & dictRes ) : m_Contents( nullptr, pdfResources( dictRes ) )
+{
+}
+
 pdfClipItem::~pdfClipItem()
 {
 }

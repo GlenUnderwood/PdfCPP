@@ -35,9 +35,9 @@ pdfGState& pdfGState::operator=( const pdfGState& src )
 	m_FlatnessTolerance = src.m_FlatnessTolerance;
 	m_LineJoin = src.m_LineJoin;
 	m_LineCap = src.m_LineCap;
-//	SetClip( src.m_pathClip.get() );
+	SetClip( src.m_pathClip );
 	SetRenderingIntent( src.m_RenderingIntent.c_str() );
-	SetDash( src.m_Dash.get() );
+	SetDashPattern( src.m_Dash );
 	SetExtGState( src.m_ExtGState );//new pdfExtGState(src.....
 
 	m_Flags = src.m_Flags;
@@ -128,7 +128,7 @@ void pdfGState::SetMatrix( const Geometry::pdfMatrix& value )
 }
 
 
-pdfGState::DashPattern* pdfGState::GetDash()
+pdfGState::DashPattern::Ptr pdfGState::GetDashPattern()
 { 
 	if (m_ExtGState != nullptr && m_ExtGState.Has("D"))
 	{
@@ -142,7 +142,7 @@ pdfGState::DashPattern* pdfGState::GetDash()
 			pdfArray arrDash(arrD[0]);
 			if (arrDash != nullptr)
 			{
-				m_Dash = std::make_unique<DashPattern>();
+				m_Dash = std::make_shared<DashPattern>();
 				//DashPattern extDash = new pdfGState.DashPattern();
 				if (arrDash.GetCount() > 0)
 				{
@@ -161,16 +161,16 @@ pdfGState::DashPattern* pdfGState::GetDash()
 	}
 	//if( m_Dash==null)
 	//	m_Dash = new pdfGState.DashPattern();
-	return m_Dash.get();
+	return m_Dash;
 } 
-void pdfGState::SetDash( const pdfGState::DashPattern* src )
+void pdfGState::SetDashPattern( const pdfGState::DashPattern::Ptr& src )
 {
-	if (src == m_Dash.get())
+	if (src.get() == m_Dash.get())
 		return;
 	m_Dash.reset();
 	if (src != nullptr)
 	{
-		m_Dash = std::make_unique<DashPattern>( *src );
+		m_Dash = std::make_shared<DashPattern>( *src );
 		/*m_Dash->SetArray( src->GetArray() );
 		m_Dash->SetPhase( src->GetPhase() );*/
 	}
@@ -251,18 +251,16 @@ void pdfGState::SetExtGState(const pdfExtGState& value)
 	m_Flags |= GStateFlags::ExtGState_;
 }
 
-//pdfClipItem pdfGState::GetClip()
-//{
-//	return m_pathClip.get();
-//}
-//
-//void pdfGState::SetClip(const pdfClipItem& value )
-//{
-//	m_pathClip.reset();
-//	if (value != nullptr)
-//		m_pathClip = std::make_unique<pdfClipItem>( *value );
-//	m_Flags |= GStateFlags::Clip;
-//}
+Content::pdfClipItem pdfGState::GetClip()
+{
+	return m_pathClip;
+}
+
+void pdfGState::SetClip(const pdfClipItem& value )
+{
+	m_pathClip = value;
+	m_Flags |= GStateFlags::Clip;
+}
 
 GStateFlags pdfGState::Differences(const pdfGState& rhs)
 {
@@ -292,13 +290,13 @@ GStateFlags pdfGState::Differences(const pdfGState& rhs)
 	if ( m1 != m2 )
 		flags |= GStateFlags::Mat;
 
-	pdfGState::DashPattern* dash1 = GetDash();
-	pdfGState::DashPattern* dash2 = const_cast<pdfGState&>(rhs).GetDash();
+	DashPattern::Ptr dash1 = GetDashPattern();
+	DashPattern::Ptr dash2 = const_cast<pdfGState&>(rhs).GetDashPattern();
 	if ( ((dash1 == nullptr && dash2!=nullptr) || (dash1 != nullptr && dash2==nullptr)) || ( dash1 != nullptr && (*dash1)!=(*dash2) ) )
 		flags |= GStateFlags::Dash;
 
-	//if ( m_pathClip != rhs.m_pathClip )
-	//	flags |= GStateFlags::Clip;
+	if ( m_pathClip != rhs.m_pathClip )
+		flags |= GStateFlags::Clip;
 	/*if (((m_pathClip == nullptr && rhs.m_pathClip != nullptr) || 
 		(m_pathClip != nullptr && rhs.m_pathClip == nullptr)) || 
 		(m_pathClip != nullptr && (*m_pathClip) != (*rhs.m_pathClip)))
@@ -309,3 +307,59 @@ GStateFlags pdfGState::Differences(const pdfGState& rhs)
 
 
 ////////////////////
+
+pdfGState::DashPattern::DashPattern( const pdfGState::DashPattern& rhs ) : m_Phase( 0 )
+{
+	operator=( rhs );
+}
+
+pdfGState::DashPattern& pdfGState::DashPattern::operator=( const pdfGState::DashPattern& rhs )
+{
+	m_Array.insert( m_Array.end(), rhs.m_Array.begin(), rhs.m_Array.end() );
+	m_Phase = rhs.m_Phase;
+	return *this;
+}
+bool pdfGState::DashPattern::operator==( const pdfGState::DashPattern& rhs )
+{
+	if ((!m_Array.empty() && rhs.m_Array.empty()) || (m_Array.empty() && !rhs.m_Array.empty()))
+		return false;
+	if (m_Array != rhs.m_Array)
+		return false;
+	return m_Phase == rhs.m_Phase;
+	//pdfGState rhs = obj as pdfGState ;
+	//if (m_LineWidth != rhs.m_LineWidth
+	//    || m_MiterLimit != rhs.m_MiterLimit
+	//    || m_FlatnessTolerance != rhs.m_FlatnessTolerance
+	//    || m_LineCap != rhs.m_LineCap
+	//    || m_LineJoin != rhs.m_LineJoin
+	//    || m_RenderingIntent != rhs.m_RenderingIntent
+	//    || m_StrokeColor != rhs.m_StrokeColor
+	//    || m_FillColor != rhs.m_FillColor
+	//    || ExtGState != rhs.ExtGState
+	//    || Mat != rhs.Mat
+	//    || Dash != rhs.Dash
+	//    || Clip != rhs.Clip
+	//    )
+	//    return false;
+	//return true;
+}
+
+std::vector<int>& pdfGState::DashPattern::GetArray()
+{
+	return m_Array;
+}
+void pdfGState::DashPattern::SetArray( const std::vector<int>& src )
+{
+	m_Array = src;
+}
+
+int pdfGState::DashPattern::GetPhase() const
+{
+	return m_Phase;
+}
+void pdfGState::DashPattern::SetPhase( const int& src )
+{
+	m_Phase = src;
+}
+
+};
